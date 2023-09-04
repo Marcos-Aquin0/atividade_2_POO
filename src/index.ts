@@ -18,5 +18,12 @@ const user2 = new User('Maria Clara', 'maria@mail.com', '3123')
 
 const app = new App()
 app.registerUser(user)
-
 console.log(app.findUser('maria@mail.com'))
+
+console.log(tomorrow)
+
+app.registerBike(bike)
+app.rentBike(bike, user, tomorrow, sevenDaysFromToday)
+app.returnBike(bike)
+
+app.removeUser(user)

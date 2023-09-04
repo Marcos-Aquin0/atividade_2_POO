@@ -21,7 +21,7 @@ export class App {
 //remove user
     removeUser(user: User): void {
         let index = this.users.indexOf(user)
-        if(index){
+        if(index != null){
             for (const rUser of this.users) {
                 if (rUser.email === user.email) {
                     this.users.splice(this.users.indexOf(user,1))
@@ -29,30 +29,35 @@ export class App {
                 }
             } 
         }
-        else throw new Error('Usuário não encontrado')
+        else console.log('Usuário não encontrado')
     }
 
 //rent bike
-    rentBike(rents: Rent[], bike: Bike, user: User, startDate: Date, endDate: Date): Rent {
-        const rent = Rent.create([], bike, user, startDate, endDate)
-        return rent
+    rentBike(bike: Bike, user: User, startDate: Date, endDate: Date): void {
+        let result = this.rents.filter((rent) => rent.bike == bike);
+            let aluguel = Rent.create(result, bike, user, startDate, endDate)
+            console.log("Sucesso! Bike alugada e pronta para ser retirada na data especificada!")
+            this.rents.push(aluguel)
     }
 
 //return bike
-    returnBike(rents: Rent[], ): void {
-        let index = this.rents.indexOf(rent.dateTo)
-        if(index){
-            for (const rRent of this.rents) {
-                if (rRent.dateTo === rent.dateTo) {
-                    this.rents.splice(this.rents.indexOf(rent,1))
-                    console.log("Bike devolvida")
-                }
-            } 
-        }
+    returnBike(bike: Bike): void {
+        let found = this.rents.find((rent) => rent.bike == bike && rent.dateReturned != null);
+        // let index = this.bikes.includes(bike)
+        //     for (const rUser of this.users) {
+        //         if (rUser.email === user.email) {
+        //             const today = new Date()
+        //             // today.setDate(today.getDate())
+        //             rent.dateReturned = today
+        //             console.log("Bike devolvida!")
+        //         }
+        //     } 
     }
 
+
     findUser(email: string): User | undefined {
-        return this.users.find(user => { return user.email === email})
+        let procura = this.users.find(user => { return user.email === email})
+        return procura
     }
 
     registerUser(user: User): void {
