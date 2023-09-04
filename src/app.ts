@@ -43,15 +43,10 @@ export class App {
 //return bike
     returnBike(bike: Bike): void {
         let found = this.rents.find((rent) => rent.bike == bike && rent.dateReturned != null);
-        // let index = this.bikes.includes(bike)
-        //     for (const rUser of this.users) {
-        //         if (rUser.email === user.email) {
-        //             const today = new Date()
-        //             // today.setDate(today.getDate())
-        //             rent.dateReturned = today
-        //             console.log("Bike devolvida!")
-        //         }
-        //     } 
+        if (found) {
+            found.dateReturned = new Date()
+            console.log("Bike devolvida!")
+        }
     }
 
 
